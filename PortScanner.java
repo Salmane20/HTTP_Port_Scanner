@@ -19,18 +19,18 @@ public class PortScanner {
 					BufferedWriter headerwriter = new BufferedWriter(new OutputStreamWriter(output));
 					BufferedReader headerreader = new BufferedReader(new InputStreamReader(input));
 					
-					String header = "http://" + web_IP + ":" +i;
+					String header = "GET http://" + web_IP + ":" +i + "HTTP/1.1";
 					
 					
 					headerwriter.write(header);
 					headerwriter.flush();
 					
-					// We assume that the Web server RESPONSE is GET:200
+					// We assume that the Web server RESPONSE is  HTTP/1.1 200 OK
 					//header response 200
 					header = headerreader.readLine();
 					
 					
-					StringTokenizer strk = new StringTokenizer(header, ":");
+					StringTokenizer strk = new StringTokenizer(header, " ");
 					
 					String command = strk.nextToken();
 					String value = strk.nextToken();
